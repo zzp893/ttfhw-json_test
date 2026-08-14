@@ -174,8 +174,19 @@
       "action": "读取 README.md 和 openUBMC 构建指导书，提取构建信息",
       "result": "成功",
       "details": {
-        "files_read": ["README.md", "CONTRIBUTING.md", ".devcontainer/devcontainer.json", "conanfile.py"],
-        "sections": ["系统要求", "环境依赖", "构建", "测试", "构建参数说明"]
+        "files_read": [
+          "README.md",
+          "CONTRIBUTING.md",
+          ".devcontainer/devcontainer.json",
+          "conanfile.py"
+        ],
+        "sections": [
+          "系统要求",
+          "环境依赖",
+          "构建",
+          "测试",
+          "构建参数说明"
+        ]
       }
     },
     {
@@ -205,7 +216,11 @@
       "action": "检查仓库 lint-runner 配置",
       "result": "未配置",
       "details": {
-        "searched_patterns": [".lint-runner.yaml", ".lint-runner.json", "lint-runner.config.*"]
+        "searched_patterns": [
+          ".lint-runner.yaml",
+          ".lint-runner.json",
+          "lint-runner.config.*"
+        ]
       }
     },
     {
@@ -215,7 +230,9 @@
       "result": "已配置",
       "details": {
         "config_dir": ".devcontainer",
-        "files": ["devcontainer.json"],
+        "files": [
+          "devcontainer.json"
+        ],
         "image": "swr.cn-north-4.myhuaweicloud.com/openubmc/ubuntu:24.04.2_26.06"
       }
     },
@@ -243,7 +260,17 @@
       "action": "安装基础工具和系统依赖",
       "result": "成功",
       "details": {
-        "packages": ["python3", "python3-pip", "python3-dev", "git", "wget", "curl", "libcurl4t64", "libcurl4-openssl-dev", "pkg-config"]
+        "packages": [
+          "python3",
+          "python3-pip",
+          "python3-dev",
+          "git",
+          "wget",
+          "curl",
+          "libcurl4t64",
+          "libcurl4-openssl-dev",
+          "pkg-config"
+        ]
       }
     },
     {
@@ -321,7 +348,9 @@
     "devcontainer": {
       "enabled": true,
       "config_dir": ".devcontainer",
-      "config_files": ["devcontainer.json"],
+      "config_files": [
+        "devcontainer.json"
+      ],
       "summary": "已配置 devcontainer，基于 Ubuntu 24.04 镜像（swr.cn-north-4.myhuaweicloud.com/openubmc/ubuntu:24.04.2_26.06），包含 VS Code 扩展配置"
     },
     "build": {
@@ -406,7 +435,7 @@
   "documentation_gaps": [
     "README 未提供独立样例执行命令，仅说明需通过 -o examples=True 构建选项启用",
     "README 提到 openUBMC 构建指导书需外部访问，未在仓库内直接包含完整初始化步骤",
-    "bingo test 的 -jit 参数在 README 中仅说明"需加此参数否则测试会失败"，未解释具体作用"
+    "bingo test 的 -jit 参数在 README 中仅说明需加此参数否则测试会失败，未解释具体作用"
   ],
   "problems_encountered": []
 }
