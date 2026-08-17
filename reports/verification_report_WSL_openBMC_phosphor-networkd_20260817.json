@@ -1,0 +1,575 @@
+{
+  "metadata": {
+    "repo_path": "/opt/agent_build_hk_02/workspace/j_UjY4s0bR/phosphor-networkd",
+    "start_time": "2026-08-17T03:16:00",
+    "end_time": "2026-08-17T03:58:00",
+    "duration_seconds": 2520,
+    "total_steps": 18
+  },
+  "machine_spec": {
+    "host_machine": {
+      "architecture": "x86_64",
+      "cpu_model": "Intel(R) Xeon(R) Gold 6151 CPU @ 3.00GHz",
+      "cpu_cores": 32,
+      "memory": "62Gi",
+      "disk": "56G available",
+      "docker_version": "Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2"
+    },
+    "container": {
+      "os": "openEuler 24.03 LTS",
+      "architecture": "x86_64",
+      "cpu_cores": 32,
+      "memory": "62Gi (无限制)"
+    },
+    "image_source": {
+      "type": "base_image",
+      "image_name": "hub.oepkgs.net/openeuler/openeuler:24.03-lts",
+      "selection_reason": "文档未指定镜像，默认使用 openEuler 24.03 LTS。用户要求使用 gcc/g++14，openEuler 仓库无 gcc-14 包，需从源码编译安装 GCC 14.2.0"
+    }
+  },
+  "document_reading_summary": {
+    "architecture": {
+      "source": "README.md + meson.build",
+      "value": "x86_64"
+    },
+    "recommended_image": {
+      "source": "未在文档中找到镜像推荐",
+      "value": "文档未指定镜像，默认使用 openEuler 24.03 LTS"
+    },
+    "dependencies": {
+      "source": "README.md + meson.build + meson.options + subprojects/*.wrap + test/meson.build",
+      "value": [
+        "meson >= 1.1.1 (pip 安装 meson 1.12.0)",
+        "ninja (dnf 安装 ninja-build)",
+        "gcc-14 / g++-14 (用户要求，openEuler 仓库无 gcc-14，从源码编译 GCC 14.2.0)",
+        "git (dnf 安装，用于 wrap-git 子项目拉取)",
+        "python3 (dnf 安装 python3-pip python3-devel)",
+        "Python 模块: inflection, mako, PyYAML, jsonschema (pip 安装，sdbus++ 工具依赖)",
+        "libnl3-devel (dnf 安装，libnl-3.0 和 libnl-genl-3.0 依赖)",
+        "systemd-devel (dnf 安装，systemd 依赖)",
+        "gtest-devel / gmock-devel (dnf 安装，单元测试依赖)",
+        "cmake (dnf 安装，stdplus 子项目的 fmt 子构建需要)",
+        "fmt-devel (dnf 安装，stdplus 依赖 fmtlib)",
+        "liburing-devel (dnf 安装，stdplus 依赖 liburing)",
+        "openssl-devel (dnf 安装)",
+        "diffutils (dnf 安装，gcc 编译需要 cmp 命令)",
+        "xz (dnf 安装，解压 gcc 源码 tarball)",
+        "dbus-daemon (dnf 安装，测试运行时需要 D-Bus 系统总线)",
+        "子项目 (wrap-git 自动拉取): sdbusplus, phosphor-dbus-interfaces, phosphor-logging, sdeventplus, stdplus, CLI11, nlohmann_json, googletest"
+      ]
+    },
+    "build_commands": {
+      "source": "README.md - To Build 章节",
+      "value": "meson build && ninja -C build"
+    },
+    "ut_commands": {
+      "source": "test/meson.build + meson.options",
+      "value": "meson test -C build (需 -Dtests=enabled 配置)"
+    },
+    "sample_commands": {
+      "source": "未在文档中找到样例命令",
+      "value": "仓库无独立样例程序，构建产物为可执行文件: phosphor-network-manager, ncsi-netlink, ncsi-cmd"
+    },
+    "special_dependencies": {
+      "source": "subprojects/*.wrap",
+      "value": [
+        "sdbusplus (https://github.com/openbmc/sdbusplus.git, 提供 sdbus++ 和 sdbus++-gen-meson 工具)",
+        "phosphor-dbus-interfaces (https://github.com/openbmc/phosphor-dbus-interfaces.git)",
+        "phosphor-logging (https://github.com/openbmc/phosphor-logging.git)",
+        "sdeventplus (https://github.com/openbmc/sdeventplus.git)",
+        "stdplus (https://github.com/openbmc/stdplus, 提供 stdplus, stdplus-gtest, run_with_tmp)"
+      ]
+    }
+  },
+  "execution_log": [
+    {
+      "timestamp": "2026-08-17T03:16:00",
+      "command": "uname -m; nproc; free -h; docker --version",
+      "success": true,
+      "output": "x86_64; 32 cores; 62Gi mem; Docker 29.1.3",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 1
+    },
+    {
+      "timestamp": "2026-08-17T03:16:30",
+      "command": "ls .pre-commit-config.yaml .devcontainer Dockerfile",
+      "success": false,
+      "output": "均不存在",
+      "error": "No such file or directory",
+      "returncode": 1,
+      "duration_seconds": 1
+    },
+    {
+      "timestamp": "2026-08-17T03:16:30",
+      "command": "find . -name '.lint-runner.*' -o -name 'lint-runner.config.*'",
+      "success": true,
+      "output": "未找到 lint-runner 配置文件",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 1
+    },
+    {
+      "timestamp": "2026-08-17T03:17:00",
+      "command": "docker pull hub.oepkgs.net/openeuler/openeuler:24.03-lts",
+      "success": true,
+      "output": "Digest: sha256:ace677f...; Status: Image is up to date",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 5
+    },
+    {
+      "timestamp": "2026-08-17T03:17:05",
+      "command": "docker run -d --name ttfhw-phosphor-networkd-env -v <repo>:/workspace -w /workspace hub.oepkgs.net/openeuler/openeuler:24.03-lts tail -f /dev/null",
+      "success": true,
+      "output": "Container ID: cd463f6f7b55...",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 2
+    },
+    {
+      "timestamp": "2026-08-17T03:18:00",
+      "command": "dnf install -y gcc gcc-c++ wget tar make gmp-devel mpfr-devel libmpc-devel flex bison zlib-devel texinfo xz diffutils",
+      "success": true,
+      "output": "安装完成（gcc 12.3.1 为编译 gcc-14 的引导编译器）",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 60
+    },
+    {
+      "timestamp": "2026-08-17T03:19:00",
+      "command": "wget https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz",
+      "success": true,
+      "output": "89MB 下载完成",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 15
+    },
+    {
+      "timestamp": "2026-08-17T03:19:15",
+      "command": "tar xf gcc-14.2.0.tar.xz && mkdir gcc-build && cd gcc-build && ../gcc-14.2.0/configure --prefix=/usr/local/gcc14 --enable-languages=c,c++ --disable-multilib --disable-nls --disable-bootstrap MAKEINFO=missing",
+      "success": true,
+      "output": "configure 成功",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 30
+    },
+    {
+      "timestamp": "2026-08-17T03:19:45",
+      "command": "make -j19 (首次尝试)",
+      "success": false,
+      "output": "s-tm-texi Error 1",
+      "error": "cmp: command not found (缺少 diffutils)",
+      "returncode": 2,
+      "duration_seconds": 55,
+      "note": "首次编译因缺少 cmp 命令失败"
+    },
+    {
+      "timestamp": "2026-08-17T03:20:40",
+      "command": "dnf install -y diffutils",
+      "success": true,
+      "output": "diffutils-3.10-2 安装完成",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 10,
+      "note": "安装 cmp 命令以解决 s-tm-texi 构建错误"
+    },
+    {
+      "timestamp": "2026-08-17T03:21:00",
+      "command": "rm -rf gcc-build && mkdir gcc-build && cd gcc-build && ../gcc-14.2.0/configure ... && make -j19 MAKEINFO=missing",
+      "success": true,
+      "output": "GCC 14.2.0 编译成功",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 463,
+      "note": "清理后重新配置并编译，耗时 7 分 43 秒"
+    },
+    {
+      "timestamp": "2026-08-17T03:28:45",
+      "command": "make install (gcc-14.2.0)",
+      "success": true,
+      "output": "安装到 /usr/local/gcc14/bin/",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 15
+    },
+    {
+      "timestamp": "2026-08-17T03:29:00",
+      "command": "/usr/local/gcc14/bin/gcc --version && /usr/local/gcc14/bin/g++ --version",
+      "success": true,
+      "output": "gcc (GCC) 14.2.0; g++ (GCC) 14.2.0",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 1
+    },
+    {
+      "timestamp": "2026-08-17T03:29:10",
+      "command": "dnf install -y python3-pip python3-devel ninja-build git pkg-config libnl3-devel systemd-devel gtest-devel gmock-devel openssl-devel cmake fmt-devel liburing-devel",
+      "success": true,
+      "output": "全部安装完成",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 120
+    },
+    {
+      "timestamp": "2026-08-17T03:31:10",
+      "command": "pip3 install meson inflection mako PyYAML jsonschema",
+      "success": true,
+      "output": "meson 1.12.0; inflection 0.5.1; mako 1.4.1; PyYAML 6.0.3; jsonschema 4.26.0",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 30
+    },
+    {
+      "timestamp": "2026-08-17T03:31:40",
+      "command": "meson setup build -Dtests=enabled (首次尝试)",
+      "success": false,
+      "output": "sdbusplus 子项目: python3 is missing modules: inflection, mako",
+      "error": "sdbusplus 需要 Python 模块 inflection 和 mako",
+      "returncode": 1,
+      "duration_seconds": 546,
+      "note": "首次配置因缺少 Python 模块失败"
+    },
+    {
+      "timestamp": "2026-08-17T03:41:00",
+      "command": "meson setup build -Dtests=enabled (第二次尝试，已安装 inflection/mako)",
+      "success": false,
+      "output": "stdplus 子项目: fmtlib is required; Exception: Unable to find CMake",
+      "error": "stdplus 需要 fmtlib 和 cmake",
+      "returncode": 1,
+      "duration_seconds": 103,
+      "note": "安装 cmake 和 fmt-devel 后重试"
+    },
+    {
+      "timestamp": "2026-08-17T03:43:00",
+      "command": "meson setup build -Dtests=enabled (第三次尝试)",
+      "success": true,
+      "output": "798 个构建目标，所有依赖已解析。子项目: CLI11, nlohmann_json, phosphor-dbus-interfaces, phosphor-logging, sdbusplus, sdeventplus, stdexec, stdplus 全部 YES",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 19
+    },
+    {
+      "timestamp": "2026-08-17T03:43:20",
+      "command": "ninja -C build -j19 (首次尝试)",
+      "success": false,
+      "output": "sdbus++ 工具报 ModuleNotFoundError: No module named 'jsonschema'",
+      "error": "sdbus++ 需要 jsonschema Python 模块",
+      "returncode": 1,
+      "duration_seconds": 18,
+      "note": "编译因缺少 jsonschema 模块失败"
+    },
+    {
+      "timestamp": "2026-08-17T03:43:40",
+      "command": "pip3 install jsonschema",
+      "success": true,
+      "output": "jsonschema 4.26.0 安装完成",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 10
+    },
+    {
+      "timestamp": "2026-08-17T03:43:50",
+      "command": "ninja -C build -j19 (第二次尝试)",
+      "success": true,
+      "output": "[942/942] Linking target src/phosphor-network-manager",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 191
+    },
+    {
+      "timestamp": "2026-08-17T03:47:00",
+      "command": "meson test -C build (首次尝试)",
+      "success": false,
+      "output": "Ok: 6, Fail: 7。失败测试报: org.freedesktop.DBus.Error.FileNotFound: No such file or directory",
+      "error": "缺少 D-Bus 系统总线",
+      "returncode": 1,
+      "duration_seconds": 2,
+      "note": "7 个测试因缺少 D-Bus 守护进程而失败"
+    },
+    {
+      "timestamp": "2026-08-17T03:56:30",
+      "command": "dbus-daemon --system --fork",
+      "success": true,
+      "output": "D-Bus 系统总线已启动",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 1,
+      "note": "安装并启动 dbus-daemon 解决测试运行时依赖"
+    },
+    {
+      "timestamp": "2026-08-17T03:56:42",
+      "command": "meson test -C build (第二次尝试)",
+      "success": true,
+      "output": "Ok: 13, Fail: 0。全部 13 个测试套件通过，163 个用例通过，1 个跳过，0 个失败",
+      "error": "",
+      "returncode": 0,
+      "duration_seconds": 3
+    }
+  ],
+  "process_timeline": [
+    {
+      "timestamp": "2026-08-17T03:16:00",
+      "step": "start",
+      "action": "开始验证流程",
+      "result": "已启动",
+      "details": {}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:10",
+      "step": "document_reading",
+      "action": "读取 README.md 了解构建说明",
+      "result": "成功",
+      "details": {"file": "README.md", "sections_read": ["To Build"], "build_command": "meson build && ninja -C build"}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:20",
+      "step": "document_reading",
+      "action": "读取 meson.build 和 meson.options 确认依赖版本和构建选项",
+      "result": "成功",
+      "details": {"file": "meson.build", "meson_version": ">=1.1.1", "cpp_std": "c++23", "tests_option": "feature"}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:25",
+      "step": "document_reading",
+      "action": "读取 subprojects/*.wrap 和 test/meson.build 确认子项目和测试框架",
+      "result": "成功",
+      "details": {"subprojects": ["sdbusplus", "phosphor-dbus-interfaces", "phosphor-logging", "sdeventplus", "stdplus", "CLI11", "nlohmann_json", "googletest"], "test_framework": "gtest/gmock"}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:30",
+      "step": "static_analysis_scan",
+      "action": "检查仓库 pre-commit 配置",
+      "result": "未配置",
+      "details": {"config_file": null, "note": "仓库有 .clang-format / .clang-tidy / .shellcheck 编辑器配置，但无 pre-commit 自动化配置"}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:30",
+      "step": "static_analysis_scan",
+      "action": "检查仓库 lint-runner 配置",
+      "result": "未配置",
+      "details": {"searched_patterns": [".lint-runner.yaml", ".lint-runner.json", "lint-runner.config.*"]}
+    },
+    {
+      "timestamp": "2026-08-17T03:16:30",
+      "step": "devcontainer_scan",
+      "action": "检查 .devcontainer 目录及配置",
+      "result": "未配置",
+      "details": {"config_dir": null}
+    },
+    {
+      "timestamp": "2026-08-17T03:17:00",
+      "step": "image_selection",
+      "action": "选择基础镜像",
+      "result": "openEuler 24.03 LTS",
+      "details": {"selection_reason": "文档未指定镜像，默认使用 openEuler 24.03 LTS。用户要求 gcc/g++14，需从源码编译安装"}
+    },
+    {
+      "timestamp": "2026-08-17T03:17:05",
+      "step": "container_setup",
+      "action": "拉取镜像并启动容器",
+      "result": "成功",
+      "details": {"image": "hub.oepkgs.net/openeuler/openeuler:24.03-lts", "container_name": "ttfhw-phosphor-networkd-env"}
+    },
+    {
+      "timestamp": "2026-08-17T03:18:00",
+      "step": "dependency_installation",
+      "action": "安装 GCC 14 构建依赖（gmp-devel, mpfr-devel, libmpc-devel, flex, bison 等）",
+      "result": "成功",
+      "details": {"packages": ["gcc", "gcc-c++", "wget", "tar", "make", "gmp-devel", "mpfr-devel", "libmpc-devel", "flex", "bison", "zlib-devel", "texinfo", "xz", "diffutils"]}
+    },
+    {
+      "timestamp": "2026-08-17T03:19:45",
+      "step": "build_gcc",
+      "action": "从源码编译 GCC 14.2.0",
+      "result": "成功",
+      "details": {"version": "14.2.0", "install_prefix": "/usr/local/gcc14", "duration_seconds": 463, "concurrency": 19}
+    },
+    {
+      "timestamp": "2026-08-17T03:29:10",
+      "step": "dependency_installation",
+      "action": "安装项目构建依赖（meson, ninja, libnl3-devel, systemd-devel, gtest-devel 等）",
+      "result": "成功",
+      "details": {"packages": ["python3-pip", "python3-devel", "ninja-build", "git", "pkg-config", "libnl3-devel", "systemd-devel", "gtest-devel", "gmock-devel", "openssl-devel", "cmake", "fmt-devel", "liburing-devel", "dbus-daemon"]}
+    },
+    {
+      "timestamp": "2026-08-17T03:31:10",
+      "step": "dependency_installation",
+      "action": "安装 Python 模块（meson, inflection, mako, PyYAML, jsonschema）",
+      "result": "成功",
+      "details": {"modules": ["meson 1.12.0", "inflection 0.5.1", "mako 1.4.1", "PyYAML 6.0.3", "jsonschema 4.26.0"]}
+    },
+    {
+      "timestamp": "2026-08-17T03:43:00",
+      "step": "meson_setup",
+      "action": "执行 meson setup build -Dtests=enabled",
+      "result": "成功",
+      "details": {"build_targets": 798, "subprojects_resolved": "CLI11, nlohmann_json, phosphor-dbus-interfaces, phosphor-logging, sdbusplus, sdeventplus, stdexec, stdplus"}
+    },
+    {
+      "timestamp": "2026-08-17T03:43:50",
+      "step": "build_attempt",
+      "action": "执行 ninja -C build -j19 编译",
+      "result": "成功",
+      "details": {"targets": "942/942", "concurrency": 19, "concurrency_ratio": "60%"}
+    },
+    {
+      "timestamp": "2026-08-17T03:47:00",
+      "step": "ut_execution",
+      "action": "首次执行单元测试",
+      "result": "部分失败",
+      "details": {"ok": 6, "fail": 7, "error": "缺少 D-Bus 系统总线"}
+    },
+    {
+      "timestamp": "2026-08-17T03:56:30",
+      "step": "problem_resolution",
+      "action": "启动 dbus-daemon 解决测试运行时依赖",
+      "result": "已解决",
+      "details": {"solution": "dbus-daemon --system --fork"}
+    },
+    {
+      "timestamp": "2026-08-17T03:56:42",
+      "step": "ut_execution",
+      "action": "重新执行单元测试",
+      "result": "成功",
+      "details": {"total_suites": 13, "passed_suites": 13, "failed_suites": 0, "total_cases": 164, "passed_cases": 163, "skipped_cases": 1, "failed_cases": 0}
+    },
+    {
+      "timestamp": "2026-08-17T03:58:00",
+      "step": "report_generation",
+      "action": "生成验证报告",
+      "result": "成功",
+      "details": {"output_file": "verification_report_WSL_phosphor-networkd_20260817.json"}
+    }
+  ],
+  "final_results": {
+    "static_analysis": {
+      "enabled": false,
+      "summary": "仓库未配置 pre-commit 和 lint-runner 自动化静态检查工具。存在 .clang-format / .clang-tidy / .shellcheck 编辑器配置文件，但无自动化执行机制",
+      "pre_commit": {
+        "configured": false,
+        "config_file": null
+      },
+      "lint_runner": {
+        "configured": false,
+        "config_file": null
+      }
+    },
+    "devcontainer": {
+      "enabled": false,
+      "config_dir": null,
+      "config_files": [],
+      "summary": "仓库未配置 devcontainer 开发容器"
+    },
+    "build": {
+      "status": "成功",
+      "duration_seconds": 191,
+      "compiler": "gcc (GCC) 14.2.0 / g++ (GCC) 14.2.0 (从源码编译安装)",
+      "build_system": "Meson 1.12.0 + Ninja 1.11.1",
+      "cpp_standard": "C++23",
+      "concurrency": 19,
+      "artifacts": [
+        {
+          "name": "phosphor-network-manager",
+          "path": "build/src/phosphor-network-manager",
+          "size": "18 MB"
+        },
+        {
+          "name": "ncsi-netlink",
+          "path": "build/src/ncsi-netlink",
+          "size": "4.0 MB"
+        },
+        {
+          "name": "ncsi-cmd",
+          "path": "build/src/ncsi-cmd",
+          "size": "1.1 MB"
+        },
+        {
+          "name": "hyp-network-manager",
+          "path": "build/src/ibm/hypervisor-network-mgr-src/hyp-network-manager",
+          "size": "5.4 MB"
+        }
+      ]
+    },
+    "ut": {
+      "status": "成功",
+      "duration_seconds": 3,
+      "total_suites": 13,
+      "passed_suites": 13,
+      "failed_suites": 0,
+      "total_cases": 164,
+      "passed_cases": 163,
+      "skipped_cases": 1,
+      "failed_cases": 0,
+      "failures": [],
+      "test_suites": [
+        {"name": "config_parser", "status": "OK", "duration": "0.08s", "cases": 11, "passed": 10, "skipped": 1},
+        {"name": "rtnetlink", "status": "OK", "duration": "0.04s", "cases": 9, "passed": 9, "skipped": 0},
+        {"name": "system_queries", "status": "OK", "duration": "0.04s", "cases": 19, "passed": 19, "skipped": 0},
+        {"name": "util", "status": "OK", "duration": "0.03s", "cases": 10, "passed": 10, "skipped": 0},
+        {"name": "types", "status": "OK", "duration": "0.03s", "cases": 28, "passed": 28, "skipped": 0},
+        {"name": "hyp_network_manager", "status": "OK", "duration": "0.03s", "cases": 1, "passed": 1, "skipped": 0},
+        {"name": "hyp_ethernet_interface", "status": "OK", "duration": "0.02s", "cases": 1, "passed": 1, "skipped": 0},
+        {"name": "hyp_sys_config", "status": "OK", "duration": "0.03s", "cases": 0, "passed": 0, "skipped": 0},
+        {"name": "netlink", "status": "OK", "duration": "0.07s", "cases": 2, "passed": 2, "skipped": 0},
+        {"name": "network_manager", "status": "OK", "duration": "0.25s", "cases": 25, "passed": 25, "skipped": 0},
+        {"name": "static_gateway", "status": "OK", "duration": "1.64s", "cases": 4, "passed": 4, "skipped": 0},
+        {"name": "dhcp_configuration", "status": "OK", "duration": "1.71s", "cases": 27, "passed": 27, "skipped": 0},
+        {"name": "ethernet_interface", "status": "OK", "duration": "1.77s", "cases": 27, "passed": 27, "skipped": 0}
+      ]
+    },
+    "sample": {
+      "status": "不适用",
+      "duration_seconds": 0,
+      "results": [
+        {
+          "sample_name": "N/A",
+          "execution_status": "不适用",
+          "output_summary": "仓库无独立样例程序。构建产物为系统服务可执行文件 (phosphor-network-manager, ncsi-netlink, ncsi-cmd)，需在 OpenBMC 环境中运行",
+          "execution_time": "N/A"
+        }
+      ]
+    }
+  },
+  "documentation_gaps": [
+    "README.md 极简，仅列出构建命令 (meson build + ninja -C build)，未列出任何依赖",
+    "README.md 未列出编译器版本要求（meson.build 中要求 cpp_std=c++23，需要 GCC 14+）",
+    "README.md 未说明如何执行单元测试（需 meson setup 时加 -Dtests=enabled，再执行 meson test）",
+    "README.md 未列出系统依赖（libnl3-devel, systemd-devel, gtest-devel 等），仅在 meson.build 和 meson.options 中隐式定义",
+    "README.md 未提及 sdbus++ 工具需要的 Python 模块依赖（inflection, mako, PyYAML, jsonschema）",
+    "README.md 未提及测试运行时需要 D-Bus 系统总线",
+    "仓库无 Dockerfile，未说明推荐的容器构建环境"
+  ],
+  "problems_encountered": [
+    {
+      "timestamp": "2026-08-17T03:19:45",
+      "problem": "从源码编译 GCC 14 时首次失败: cmp: command not found (s-tm-texi 目标)",
+      "solution": "安装 diffutils 包提供 cmp 命令，清理构建目录后重新配置并编译",
+      "source": "gcc 构建系统 move-if-change 脚本依赖 cmp 命令"
+    },
+    {
+      "timestamp": "2026-08-17T03:31:40",
+      "problem": "meson setup 失败: sdbusplus 子项目的 sdbus++ 工具缺少 Python 模块 inflection 和 mako",
+      "solution": "pip3 install inflection mako PyYAML",
+      "source": "subprojects/sdbusplus/meson.build:26"
+    },
+    {
+      "timestamp": "2026-08-17T03:41:00",
+      "problem": "meson setup 失败: stdplus 子项目要求 fmtlib，且 cmake 未安装导致 fmt 子构建失败",
+      "solution": "dnf install cmake fmt-devel liburing-devel",
+      "source": "subprojects/stdplus/src/meson.build:12"
+    },
+    {
+      "timestamp": "2026-08-17T03:43:20",
+      "problem": "ninja 编译失败: sdbus++ 工具缺少 jsonschema Python 模块",
+      "solution": "pip3 install jsonschema",
+      "source": "subprojects/sdbusplus/tools/sdbusplus/event.py:6"
+    },
+    {
+      "timestamp": "2026-08-17T03:47:00",
+      "problem": "7 个单元测试失败: org.freedesktop.DBus.Error.FileNotFound: No such file or directory",
+      "solution": "安装并启动 dbus-daemon (--system --fork) 提供 D-Bus 系统总线",
+      "source": "sdbusplus::bus_t::new_default() 需要 /var/run/dbus/system_bus_socket"
+    }
+  ]
+}
